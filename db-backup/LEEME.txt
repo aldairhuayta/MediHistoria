@@ -1,0 +1,8 @@
+CARPETA DEL BACKUP DE LA BASE DE DATOS
+--------------------------------------
+Aqui se colocara el backup final (.bak) de la base de datos MediHistoria
+al momento de la entrega (Semana 15).
+
+Si el archivo supera el limite de GitHub, reemplazar este texto por:
+  - Nombre exacto del archivo: [completar]
+  - Enlace de descarga (Google Drive / OneDrive): [completar]

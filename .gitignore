@@ -1,0 +1,16 @@
+# Compilados
+target/
+out/
+*.class
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Credenciales locales de la base de datos (NUNCA subir)
+config/db.properties
+
+# Sistema operativo / varios
+.DS_Store
+Thumbs.db
+*.log

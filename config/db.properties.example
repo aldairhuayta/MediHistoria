@@ -1,0 +1,7 @@
+# Copie este archivo como "db.properties" (en esta misma carpeta) y complete sus datos.
+# El archivo db.properties esta excluido de Git: cada integrante usa su propia contrasena.
+db.host=localhost
+db.port=1433
+db.name=MediHistoria
+db.user=sa
+db.password=CAMBIAR_POR_SU_CONTRASENA
