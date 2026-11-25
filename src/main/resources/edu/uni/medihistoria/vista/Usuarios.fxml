@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="edu.uni.medihistoria.controlador.UsuarioController">
+    <top>
+        <HBox>
+            <padding>
+                <Insets top="14" right="16" bottom="6" left="16"/>
+            </padding>
+            <Label text="Gestión de usuarios" styleClass="seccion-titulo"/>
+        </HBox>
+    </top>
+    <center>
+        <TableView fx:id="tabla">
+            <columns>
+                <TableColumn fx:id="colUsuario" text="Usuario" prefWidth="130"/>
+                <TableColumn fx:id="colNombre" text="Nombre completo" prefWidth="220"/>
+                <TableColumn fx:id="colRol" text="Rol" prefWidth="120"/>
+                <TableColumn fx:id="colEstado" text="Estado" prefWidth="90"/>
+                <TableColumn fx:id="colAcceso" text="Último acceso" prefWidth="140"/>
+            </columns>
+            <BorderPane.margin>
+                <Insets left="16" right="16"/>
+            </BorderPane.margin>
+        </TableView>
+    </center>
+    <bottom>
+        <VBox spacing="8">
+            <padding>
+                <Insets top="12" right="16" bottom="12" left="16"/>
+            </padding>
+            <GridPane hgap="10" vgap="8">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="80"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                    <ColumnConstraints minWidth="80"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+                <Label text="Usuario" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtUsuario" promptText="ej. dra.ramos" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <Label text="Rol" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                <ComboBox fx:id="cmbRol" maxWidth="Infinity" promptText="Seleccione un rol"
+                          GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+                <Label text="Nombres" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtNombres" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                <Label text="Apellidos" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                <TextField fx:id="txtApellidos" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+                <CheckBox fx:id="chkActivo" text="Cuenta activa" selected="true"
+                          GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+            </GridPane>
+            <HBox spacing="8">
+                <Button text="Nuevo" styleClass="boton-secundario" onAction="#onNuevo"/>
+                <Button text="Guardar" onAction="#onGuardar"/>
+                <Button fx:id="btnRestablecer" text="Restablecer contraseña" onAction="#onRestablecer"/>
+                <Button fx:id="btnDesbloquear" text="Desbloquear cuenta" onAction="#onDesbloquear"/>
+            </HBox>
+            <Label fx:id="lblMensaje" styleClass="mensaje-info" wrapText="true"/>
+        </VBox>
+    </bottom>
+</BorderPane>
