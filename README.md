@@ -4,7 +4,7 @@ Sistema de Historial Clínico Electrónico para Consultorios. Aplicación de esc
 
 Proyecto del curso **Ingeniería de Software (CIB02)** — UNI-FIEE — Grupo 1.
 
-**Estado actual:** Sprint 1 (acceso seguro): inicio de sesión contra la base de datos, control de acceso por roles y gestión de usuarios.
+**Estado actual:** Sprint 4 (consulta, historial y auditoría). Sprint 1: acceso seguro (login contra la base de datos, control de acceso por roles y gestión de usuarios). Sprint 2: registro, búsqueda y actualización de pacientes con sus datos sensibles cifrados. Sprint 3: programación, reprogramación y cancelación de citas sin cruces de horario, triaje (signos vitales) y agenda del médico con acceso a la ficha del paciente. Sprint 4: nota de consulta SOAP cifrada (borrador y cierre inmutable), historial clínico y consulta de la auditoría.
 
 ## Integrantes
 
@@ -31,8 +31,8 @@ Proyecto del curso **Ingeniería de Software (CIB02)** — UNI-FIEE — Grupo 1.
 
 ### 1. Preparar la base de datos
 1. Abrir **SSMS** y conectarse al servidor local.
-2. Abrir y ejecutar (F5) `database/01_crear_base_datos.sql` y después `database/02_datos_iniciales.sql`.
-3. Verificar que aparecen **7 tablas** y **4 usuarios**.
+2. Abrir y ejecutar (F5), **en este orden**: `database/01_crear_base_datos.sql`, `database/02_datos_iniciales.sql`, `database/03_pacientes_cifrados.sql`, `database/04_citas_triaje.sql` y `database/05_consulta_inmutable.sql`.
+3. Verificar que aparecen **7 tablas**, **4 usuarios** y que la tabla `Paciente` tiene la columna `dniHash`.
 
 > Si Java no logra conectarse: en *SQL Server Configuration Manager* habilitar **TCP/IP** (puerto 1433) y reiniciar el servicio de SQL Server. La autenticación debe permitir usuario y contraseña (modo mixto) si usan `sa`.
 
@@ -41,7 +41,13 @@ Proyecto del curso **Ingeniería de Software (CIB02)** — UNI-FIEE — Grupo 1.
 2. Completar `db.user` y `db.password` con los de su SQL Server.
 3. **Ese archivo no se sube a GitHub** (está en `.gitignore`).
 
-### 3. Ejecutar la aplicación
+### 3. Claves de cifrado (se generan solas)
+La primera vez que se abre el módulo **Pacientes**, la aplicación crea `config/seguridad.properties` con dos claves aleatorias que protegen los datos sensibles (DNI, teléfono, dirección y alergias).
+- Ese archivo **no se sube a GitHub**.
+- **Guarde una copia:** sin él no se pueden leer los datos ya cifrados de la base de datos.
+- Si se comparte una misma base de datos entre equipos (por ejemplo, al restaurar el backup `.bak`), se debe usar **el mismo archivo** de claves.
+
+### 4. Ejecutar la aplicación
 - **IntelliJ:** abrir el proyecto (archivo `pom.xml`), esperar a que Maven descargue las dependencias y ejecutar la clase `edu.uni.medihistoria.Launcher`.
   Si no encuentra `config/db.properties`, en *Run → Edit Configurations* poner **Working directory** = la carpeta raíz del proyecto.
 - **Terminal:** `mvn javafx:run`
@@ -64,12 +70,12 @@ Son cuentas de demostración del curso; en un sistema real se eliminarían antes
 ```
 MediHistoria/
 ├── src/main/java/edu/uni/medihistoria/
-│   ├── modelo/        Rol, Modulo, Usuario (reglas del dominio, sin JavaFX)
+│   ├── modelo/        Rol, Modulo, Accion, Usuario, Paciente, Cita, Triaje, Consulta (reglas del dominio, sin JavaFX)
 │   ├── vista/         (FXML en src/main/resources/.../vista)
-│   ├── controlador/   Login, Principal, CambiarClave, Usuario
+│   ├── controlador/   Login, Principal, CambiarClave, Usuario, Paciente, Cita, Triaje, Consulta, Historial, Auditoria
 │   ├── datos/         ConexionBD, DAO (único lugar con SQL)
-│   ├── seguridad/     hash de contraseñas, autenticación, sesión, auditoría
-│   └── util/          Navegador, Alertas, Validador
+│   ├── seguridad/     hash de contraseñas, cifrado de datos, autenticación, sesión, auditoría
+│   └── util/          Navegador, Alertas, Validador, Horario, Formatos
 ├── src/main/resources/edu/uni/medihistoria/vista/   Pantallas .fxml y estilos.css
 ├── database/          Scripts SQL (esquema y datos iniciales)
 ├── db-backup/         Backup .bak de la base de datos (entrega final)
@@ -77,11 +83,21 @@ MediHistoria/
 └── docs/              Documento de sustentación, diagramas y guías
 ```
 
+## Generar el ejecutable (.jar)
+
+```
+mvn clean package
+java -jar target/medihistoria.jar
+```
+
+El `.jar` se genera en `target/medihistoria.jar`. La carpeta `config/` (con `db.properties` y `seguridad.properties`) debe estar en la carpeta desde la que se ejecuta el comando.
+
 ## Backup de la base de datos
 
 El backup final (`.bak`) se entrega en la carpeta **`db-backup/`**, o bien su enlace de descarga queda indicado en `db-backup/LEEME.txt`.
 
 - Nombre del archivo: *(se completa en la entrega final)*
+- **Importante:** los datos de pacientes están cifrados. Junto con el `.bak` se entrega el archivo `config/seguridad.properties` por el mismo medio autorizado; sin él la aplicación no puede leer esos datos.
 - Restauración: SSMS → clic derecho en *Databases* → *Restore Database…*, o con `RESTORE DATABASE MediHistoria FROM DISK = '<ruta>\MediHistoria.bak'`.
 
 ## Flujo de trabajo
