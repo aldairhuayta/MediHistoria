@@ -1,0 +1,73 @@
+.root {
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 13px;
+}
+
+.fondo-blanco {
+    -fx-background-color: white;
+}
+
+.titulo {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1F3864;
+}
+
+.titulo-medio {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1F3864;
+}
+
+.seccion-titulo {
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1F3864;
+}
+
+.subtitulo {
+    -fx-text-fill: #5B6B82;
+}
+
+.mensaje-error {
+    -fx-text-fill: #B00020;
+}
+
+.mensaje-info {
+    -fx-text-fill: #1F3864;
+}
+
+.button {
+    -fx-background-color: #1F3864;
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+    -fx-padding: 6 14 6 14;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #2C4E86;
+}
+
+.button:disabled {
+    -fx-opacity: 0.45;
+}
+
+.boton-secundario {
+    -fx-background-color: #E3E9F2;
+    -fx-text-fill: #1F3864;
+}
+
+.boton-secundario:hover {
+    -fx-background-color: #D2DBE9;
+}
+
+.menu-bar {
+    -fx-background-color: #EDF1F7;
+}
+
+.barra-estado {
+    -fx-background-color: #EDF1F7;
+    -fx-padding: 6 14 6 14;
+    -fx-border-color: #C5CCD8 transparent transparent transparent;
+}
