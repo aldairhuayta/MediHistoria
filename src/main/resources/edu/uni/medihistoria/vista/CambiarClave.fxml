@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="edu.uni.medihistoria.controlador.CambiarClaveController"
+      spacing="10" prefWidth="380" styleClass="fondo-blanco">
+    <padding>
+        <Insets top="20" right="24" bottom="20" left="24"/>
+    </padding>
+    <Label text="Cambiar contraseña" styleClass="seccion-titulo"/>
+    <Label fx:id="lblAviso" wrapText="true"/>
+    <Label text="Contraseña actual"/>
+    <PasswordField fx:id="txtActual"/>
+    <Label text="Contraseña nueva"/>
+    <PasswordField fx:id="txtNueva"/>
+    <Label text="Confirmar contraseña nueva"/>
+    <PasswordField fx:id="txtConfirmar" onAction="#onAceptar"/>
+    <Label text="Mínimo 8 caracteres, con mayúsculas, minúsculas y números." styleClass="subtitulo" wrapText="true"/>
+    <Label fx:id="lblMensaje" styleClass="mensaje-error" wrapText="true"/>
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Cancelar" styleClass="boton-secundario" onAction="#onCancelar"/>
+        <Button text="Aceptar" onAction="#onAceptar"/>
+    </HBox>
+</VBox>
