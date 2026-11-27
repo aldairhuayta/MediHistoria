@@ -1,0 +1,13 @@
+# Este archivo es SOLO una explicacion. NO es necesario copiarlo.
+#
+# La primera vez que se usa el modulo de Pacientes, la aplicacion genera automaticamente
+# config/seguridad.properties con dos claves aleatorias (cifrado.clave y cifrado.hmac).
+#
+# - Ese archivo NO se sube a GitHub (esta en .gitignore).
+# - Guarde una copia: sin el NO se pueden leer los datos cifrados de la base de datos.
+# - Para compartir una misma base de datos entre equipos (por ejemplo, al entregar el backup .bak),
+#   se debe entregar tambien este archivo por el medio autorizado, junto al backup.
+#
+# Formato (cada clave: 32 bytes en Base64):
+# cifrado.clave=...
+# cifrado.hmac=...
